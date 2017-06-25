@@ -39,10 +39,25 @@ public class MainActivity extends AppCompatActivity {
                     if(gameStates[winning[0]] == 0){
                         winner = "Yellow";
                     }
+                    layout = findViewById(R.id.play_again_layout);
                     TextView tv = (TextView) findViewById(R.id.winner);
                     tv.setText(winner + " has won!");
                     gameActive = false;
                     layout.setVisibility(View.VISIBLE);
+
+                }
+                else{
+                    boolean gameOver = true;
+                    for(int counterStates : gameStates) {
+                        if (counterStates == 2) gameOver = false;
+                    }
+                        if(gameOver){
+                            TextView tv = (TextView) findViewById(R.id.winner);
+                            tv.setText("Draw occured");
+                            gameActive = false;
+                            layout = findViewById(R.id.play_again_layout);
+                            layout.setVisibility(View.VISIBLE);
+                        }
 
                 }
             }
@@ -51,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void playAgain(View view){
+        layout = findViewById(R.id.play_again_layout);
         layout.setVisibility(View.INVISIBLE);
         activePlayer = 0;
         gameActive = true;
@@ -67,6 +83,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        layout = findViewById(R.id.play_again_layout);
     }
 }
